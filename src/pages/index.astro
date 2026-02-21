@@ -1,19 +1,11 @@
 ---
-const pageTitle = "Page d’accueil";
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "Page d'accueil";
+import BlogPost from '../components/BlogPost.astro';
+import Greeting from '../components/Greeting.jsx';
 ---
-
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <a href="/">Accueil</a>
-    <a href="/about/">À propos</a>
-    <a href="/blog/">Blog</a>
-    <h1>{pageTitle}</h1>
-  </body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <h2>Mon sous-titre de blog génial</h2>
+  <BlogPost url="/blog/mon-premier-post" title="Mon premier post"/>
+  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+</BaseLayout>

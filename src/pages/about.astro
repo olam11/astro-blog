@@ -1,4 +1,6 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 const pageTitle = "À propos de moi";
 const identity = {
   firstName: "Sarah",
@@ -15,19 +17,27 @@ const skills = [
   "Astro",
   "Rédaction de documentation",
 ];
+const happy = true;
+const finished = true;
+const goal = 3;
+const skillColor = "crimson";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <a href="/">Accueil</a>
-    <a href="/about/">À propos</a>
-    <a href="/blog/">Blog</a>
-    <h1>{pageTitle}</h1>
+    <BaseLayout pageTitle={pageTitle}>
+              <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+      }
+    </style>
+      
     <h2>... et de mon nouveau site Astro !</h2>
 
     <p>
@@ -60,7 +70,17 @@ const skills = [
     </ul>
     <p>Voici mes compétences :</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
-  </body>
-</html>
+    {happy && <p>Je suis heureux d'apprendre Astro !</p>}
+
+    {finished && <p>J'ai terminé ce tutoriel !</p>}
+
+    {
+      goal === 3 ? (
+        <p>Mon objectif est de terminer en 3 jours.</p>
+      ) : (
+        <p>Mon objectif n'est pas de 3 jours.</p>
+      )
+    }
+    </BaseLayout>
